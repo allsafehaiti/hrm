@@ -25,9 +25,8 @@ class CreateDossierEmploye extends Migration
             $table->string('Adresse');
             $table->string('Telephone');
             $table->string('Email')->unique();
-            $table->string('Profession');
+            $table->bigInteger('Profession');
             $table->string('StatutMatrimonial');
-            $table->text('Competences');
             $table->timestamps();
         });
     }

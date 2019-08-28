@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateStatusDossier extends Migration
+class CreateExperiencesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,12 @@ class CreateStatusDossier extends Migration
      */
     public function up()
     {
-        Schema::table('dossieremploye', function (Blueprint $table) {
-            $table->string('Status');
+        Schema::create('experiences', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('Poste');
+            $table->dateTime('FromDate');
+            $table->dateTime('ToDate');
+            $table->bigInteger('EmployeId');
         });
     }
 
@@ -25,8 +29,6 @@ class CreateStatusDossier extends Migration
      */
     public function down()
     {
-        Schema::table('dossieremploye', function (Blueprint $table) {
-            $table->dropColumn('Status');
-        });
+        Schema::dropIfExists('experiences');
     }
 }
