@@ -27,10 +27,10 @@ class FormulaireDossierEmploye extends FormRequest
                 'Sexe'=>'required','DateNaissance'=>'required',
                 'LieuNaissance'=>'required','Cin'=>'required',
                 'Nif'=>'required','Adresse'=>'required','Telephone'=>'required',
-                'Email'=>'required','Profession'=>'required','StatutMatrimonial'=>'required',
-                'Competences'=>'required'
+                'Email'=>'required|email','Profession'=>'required','StatutMatrimonial'=>'required',
 
-            
+
+
         ];
     }
 
@@ -41,7 +41,7 @@ class FormulaireDossierEmploye extends FormRequest
             'DateNaissance.required'=>'Date naissance requis','LieuNaissance.required'=>'Lieu naissance requis',
             'Cin.required'=>'Cin requis','Nif.required'=>'Nif requis','Adresse.required'=>'Adresse requis','Telephone.required'=>'Telephone requis',
             'Email.required'=>'Email requis','Profession.required'=>'Profession requis','StatutMatrimonial-required'=>'Status requis',
-            'Comptetences.required'=>'Competences requis'
+            'Comptetences.required'=>'Competences requis','Email.email'=>'Entrer un email valide'
         ];
     }
 }

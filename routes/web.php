@@ -12,5 +12,12 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('general');
 });
+Route::post('dossierEmploye','Controller\DossierEmployeController@store')->name('dossierEmploye');
+Route::get('enregistrement','Controller\DossierEmployeController@create')->name('enregistrement');
+Route::get('api/listeProfession','Controller\DossierEmployeController@listeProfession');
+Route::get('api/listeSkills','Controller\DossierEmployeController@listeSkills');
+Route::get('dossierEmploye/{id}','Controller\DossierEmployeController@edit');
+Route::get('listeDossierEmploye','Controller\DossierEmployeController@listeDossier');
+Route::post('modifDossierEmploye/{id}','Controller\DossierEmployeController@editpost');
