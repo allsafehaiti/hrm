@@ -21,5 +21,9 @@ class DossierEmploye extends Model
    {
       return $this->hasMany('App\Model\DossierEmploye\Experience','EmployeId');
    }
+   public function Compte()
+   {
+       return $this->hasOne('App\User','idDossier');
+   }
 
 }

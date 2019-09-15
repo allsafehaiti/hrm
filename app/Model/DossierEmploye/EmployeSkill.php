@@ -8,4 +8,5 @@ class EmployeSkill extends Model
 {
     protected $table='employe_skills';
     protected $guarded=[];
+    public $timestamps=false;
 }
