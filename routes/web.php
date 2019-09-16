@@ -12,6 +12,9 @@
 */
 
 Route::get('/', function () {
+    return view('loginHrm');
+});
+Route::get('accueil',function(){
     return view('general');
 });
 Route::post('dossierEmploye','Controller\DossierEmployeController@store')->name('dossierEmploye');
@@ -21,3 +24,16 @@ Route::get('api/listeSkills','Controller\DossierEmployeController@listeSkills');
 Route::get('dossierEmploye/{id}','Controller\DossierEmployeController@edit');
 Route::get('listeDossierEmploye','Controller\DossierEmployeController@listeDossier');
 Route::post('modifDossierEmploye/{id}','Controller\DossierEmployeController@editpost');
+Route::get('loginForm','Controller\utilisateurController@loginForm');
+Route::post('loginForm','Controller\utilisateurController@register');
+Route::post('login','Controller\utilisateurController@login');
+Route::get('logout','Controller\utilisateurController@loggout');
+////////////////////
+Route::get('resetUser/{id}','Controller\utilisateurController@resetUser');
+Route::get('reactivateUser/{id}','Controller\utilisateurController@reactivateUser');
+Route::get('deleteUser/{id}','Controller\utilisateurController@deleteUser');
+Route::get('modifierMdp',function()
+{
+    return view('modifierMdp');
+});
+Route::post('changerMdp','Controller\utilisateurController@changerMdp');

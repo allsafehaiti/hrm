@@ -64,6 +64,7 @@ var listeSkills=new Map();
 
 
   $(document).ready(function(){
+    $('#loader').hide();
     var text='<fieldset ><legend>    Travail</legend>';
                  text+='   <div class="box-body">';
 
@@ -182,30 +183,76 @@ var listeSkills=new Map();
                 $("html, body").animate({ scrollTop: 0 },500);
                 $('#enregistrementError').fadeIn(1000);
                 $('#enregistrementError').fadeOut(5000);
-
+                $('#nomErreur').empty();
+                $('#prenomErreur').empty();
+                $('#emailErreur').empty();
+                $('#adresseErreur').empty();
+                $('#phoneErreur').empty();
+                $('#lieuNaissanceErreur').empty();
+                $('#dateNaissanceErreur').empty();
+                $('#cinErreur').empty();
+                $('#nifErreur').empty();
                      if(xhr.responseJSON.errors['Nom'])
                      {
-                        $('#nomErreur').empty();
+
                          $('#nomErreur').append(xhr.responseJSON.errors['Nom'][0]);
                          $('#nomErreur').show();
                      }
+                     if( xhr.responseJSON.errors['Telephone'])
+                     {
+
+                         $('#phoneErreur').append(xhr.responseJSON.errors['Telephone'][0]);
+                         $('#phoneErreur').show();
+                     }
                      if( xhr.responseJSON.errors['Prenom'])
                      {
-                        $('#prenomErreur').empty();
+
                          $('#prenomErreur').append(xhr.responseJSON.errors['Prenom'][0]);
                          $('#prenomErreur').show();
                      }
                      if( xhr.responseJSON.errors['Email'])
                      {
-                        $('#emailErreur').empty();
+
                          $('#emailErreur').append(xhr.responseJSON.errors['Email'][0]);
                          $('#emailErreur').show();
                      }
                      if( xhr.responseJSON.errors['Profession'])
                      {
+
                          $('#professionErreur').append(xhr.responseJSON.errors['Profession'][0]);
                          $('#professionErreur').show();
                      }
+                     if( xhr.responseJSON.errors['Adresse'])
+                     {
+
+                         $('#adresseErreur').append(xhr.responseJSON.errors['Adresse'][0]);
+                         $('#adresseErreur').show();
+                     }
+                     if( xhr.responseJSON.errors['LieuNaissance'])
+                     {
+
+                         $('#lieuNaissanceErreur').append(xhr.responseJSON.errors['LieuNaissance'][0]);
+                         $('#lieuNaissanceErreur').show();
+                     }
+                     if( xhr.responseJSON.errors['DateNaissance'])
+                     {
+
+                         $('#dateNaissanceErreur').append(xhr.responseJSON.errors['DateNaissance'][0]);
+                         $('#dateNaissanceErreur').show();
+                     }
+                     if( xhr.responseJSON.errors['Nif'])
+                     {
+
+                         $('#nifErreur').append(xhr.responseJSON.errors['Nif'][0]);
+                         $('#nifErreur').show();
+                     }
+                     if( xhr.responseJSON.errors['Cin'])
+                     {
+
+                         $('#cinErreur').append(xhr.responseJSON.errors['Cin'][0]);
+                         $('#cinErreur').show();
+                     }
+
 
 
                  }

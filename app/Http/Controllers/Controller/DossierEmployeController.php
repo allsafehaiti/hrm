@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
 use App\Model\DossierEmploye\DossierEmploye;
 use App\Model\DossierEmploye\Skill;
 use App\Model\DossierEmploye\EmployeSkill;
@@ -87,7 +88,7 @@ class DossierEmployeController extends Controller
 
 
 
-        return response()->json($dossier);
+        return response("Sauvegarde Reussi",200);
 
     }
 
@@ -116,8 +117,15 @@ class DossierEmployeController extends Controller
         return response()->view('modifierDossier',['dossierEmploye'=>$dossier]);
     }
 
-    public function editPost(FormulaireDossierEmploye $request,$dossier)
+    public function editPost(Request $request,$dossier)
     {
+        Validator::make($request->all(), [
+            'Nom'=>'required','Prenom'=>'required',
+                'Sexe'=>'required','DateNaissance'=>'required',
+                'LieuNaissance'=>'required','Cin'=>'required',
+                'Nif'=>'required','Adresse'=>'required','Telephone'=>'required',
+                'Email'=>'required|email','Profession'=>'required','StatutMatrimonial'=>'required'
+        ])->validate();
         $dossier=DossierEmploye::find($dossier);
         $dossier->Nom=$request->input('Nom');
         $dossier->Prenom=$request->input('Prenom');
@@ -162,7 +170,7 @@ class DossierEmployeController extends Controller
         }
     }
 
-    return response()->json($dossier);
+    return response('Modification effectue avec Succes',200);
     }
 
     /**

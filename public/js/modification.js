@@ -128,7 +128,7 @@
 
 
           $(document).ready(function(){
-
+            $('#loader').hide();
               $('#sende').click(function()
               {
                 var getKey=function getkey(object,value){
@@ -218,33 +218,78 @@
                      error:function(xhr,status,error){
                         console.log(xhr);
 
-                        $("html, body").animate({ scrollTop: 0 },500);
+                $("html, body").animate({ scrollTop: 0 },500);
                 $('#enregistrementError').fadeIn(1000);
                 $('#enregistrementError').fadeOut(5000);
+                $('#nomErreur').empty();
+                $('#prenomErreur').empty();
+                $('#emailErreur').empty();
+                $('#adresseErreur').empty();
+                $('#phoneErreur').empty();
+                $('#lieuNaissanceErreur').empty();
+                $('#dateNaissanceErreur').empty();
+                $('#cinErreur').empty();
+                $('#nifErreur').empty();
+                     if(xhr.responseJSON.errors['Nom'])
+                     {
 
-                         if(xhr.responseJSON.errors['Nom'])
-                         {
-                            $('#nomErreur').empty();
-                             $('#nomErreur').append(xhr.responseJSON.errors['Nom'][0]);
-                             $('#nomErreur').show();
-                         }
-                         if(xhr.responseJSON.errors['Prenom'])
-                         {
-                            $('#prenomErreur').empty();
-                             $('#prenomErreur').append(xhr.responseJSON.errors['Prenom'][0]);
-                             $('#prenomErreur').show();
-                         }
-                         if( xhr.responseJSON.errors['Email'])
-                         {
-                            $('#emailErreur').empty();
-                             $('#emailErreur').append(xhr.responseJSON.errors['Email'][0]);
-                             $('#emailErreur').show();
-                         }
-                         if( xhr.responseJSON.errors['Profession'])
-                         {
-                             $('#professionErreur').append(xhr.responseJSON.errors['Profession'][0]);
-                             $('#professionErreur').show();
-                         }
+                         $('#nomErreur').append(xhr.responseJSON.errors['Nom'][0]);
+                         $('#nomErreur').show();
+                     }
+                     if( xhr.responseJSON.errors['Prenom'])
+                     {
+
+                         $('#prenomErreur').append(xhr.responseJSON.errors['Prenom'][0]);
+                         $('#prenomErreur').show();
+                     }
+                     if( xhr.responseJSON.errors['Email'])
+                     {
+
+                         $('#emailErreur').append(xhr.responseJSON.errors['Email'][0]);
+                         $('#emailErreur').show();
+                     }
+                     if( xhr.responseJSON.errors['Profession'])
+                     {
+
+                         $('#professionErreur').append(xhr.responseJSON.errors['Profession'][0]);
+                         $('#professionErreur').show();
+                     }
+                     if( xhr.responseJSON.errors['Adresse'])
+                     {
+
+                         $('#adresseErreur').append(xhr.responseJSON.errors['Adresse'][0]);
+                         $('#adresseErreur').show();
+                     }
+                     if( xhr.responseJSON.errors['LieuNaissance'])
+                     {
+
+                         $('#lieuNaissanceErreur').append(xhr.responseJSON.errors['LieuNaissance'][0]);
+                         $('#lieuNaissanceErreur').show();
+                     }
+                     if( xhr.responseJSON.errors['DateNaissance'])
+                     {
+
+                         $('#dateNaissanceErreur').append(xhr.responseJSON.errors['DateNaissance'][0]);
+                         $('#dateNaissanceErreur').show();
+                     }
+                     if( xhr.responseJSON.errors['Nif'])
+                     {
+
+                         $('#nifErreur').append(xhr.responseJSON.errors['Nif'][0]);
+                         $('#nifErreur').show();
+                     }
+                     if( xhr.responseJSON.errors['Cin'])
+                     {
+
+                         $('#cinErreur').append(xhr.responseJSON.errors['Cin'][0]);
+                         $('#cinErreur').show();
+                     }
+                     if( xhr.responseJSON.errors['Telephone'])
+                     {
+
+                         $('#phoneErreur').append(xhr.responseJSON.errors['Telephone'][0]);
+                         $('#phoneErreur').show();
+                     }
 
 
                      }
@@ -259,3 +304,85 @@
         $('#load').delay().hide(500);
       });
 
+////////////////create user and modif user////////////
+$('#createUser').click(function(){
+    $.ajaxSetup({
+
+        headers: {
+
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+
+                }
+  });
+    $.ajax({
+        url:'loginForm',
+        type:'POST',
+        data:{'nomUtilisateur':$('#email').val(),'motDePasse':'password','roles':'no_roles',
+                'idDossier':$('#dossierId').val()},
+        success:function(resultat){
+            $("html, body").animate({ scrollTop: 0 },500);
+            $('#enregistrementSuccess').fadeIn(1000);
+            $('#enregistrementSuccess').fadeOut(5000);
+            console.log(resultat);
+        },
+        error:function(resultat){
+            console.log(resultat);
+        }
+
+    });
+});
+
+////////////reset user/////////////////////////////
+$('#resetUser').click(function(){
+
+    $.ajax({
+        url:'resetUser/'+$('#dossierId').val(),
+        type:'GET',
+        success:function(resultat){
+            $("html, body").animate({ scrollTop: 0 },500);
+            $('#enregistrementSuccess').fadeIn(1000);
+            $('#enregistrementSuccess').fadeOut(5000);
+        },
+        error:function(resultat){
+            console.log(resultat);
+        }
+
+    });
+});
+///////////////delete user///////////////////////////
+$('#deleteUser').click(function(){
+
+    $.ajax({
+        url:'deleteUser/'+$('#dossierId').val(),
+        type:'GET',
+        success:function(resultat){
+            $("html, body").animate({ scrollTop: 0 },500);
+            $('#enregistrementSuccess').fadeIn(1000);
+            $('#enregistrementSuccess').fadeOut(5000);
+
+        },
+        error:function(resultat){
+            console.log(resultat);
+        }
+
+    });
+});
+
+//////////reactivate user////////////////////
+$('#reactivateUser').click(function(){
+
+    $.ajax({
+        url:'reactivateUser/'+$('#dossierId').val(),
+        type:'GET',
+        success:function(resultat){
+            $("html, body").animate({ scrollTop: 0 },500);
+            $('#enregistrementSuccess').fadeIn(1000);
+            $('#enregistrementSuccess').fadeOut(5000);
+
+        },
+        error:function(resultat){
+            console.log(resultat);
+        }
+
+    });
+});

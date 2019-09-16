@@ -73,12 +73,12 @@
               <div class="box-body">
                   <div class="form-group">
                       <label for="nom">Nom</label>
-                  <input value={{$dossierEmploye->Nom}} type="text" class="form-control" id="nom" name="nom" placeholder="Entrer le nom" required="required" >
+                  <input value='{{$dossierEmploye->Nom}}' type="text" class="form-control" id="nom" name="nom" placeholder="Entrer le nom" required="required" >
                   <span id='nomErreur' class='text-danger' style="display:none;"> </span>
                     </div>
                    <div class="form-group">
                       <label for="prenom">Prenom</label>
-                      <input value={{$dossierEmploye->Prenom}} type="text" class="form-control" id="prenom" name="prenom"  placeholder="Entrer le prenom"required="required">
+                      <input value='{{$dossierEmploye->Prenom}}' type="text" class="form-control" id="prenom" name="prenom"  placeholder="Entrer le prenom"required="required">
                       <span id='prenomErreur' class='text-danger' style="display:none;"> </span>
                     </div>
 
@@ -88,13 +88,21 @@
                      <fieldset id="sexe">
                           <div class="radio">
                               <label for="masculin" class="radio">
+                                  @if($dossierEmploye->Sexe=='masculin')
                               <input type="radio" checked name="origine" value="masculin" id="masculin" required="required">
-                              Masculin
+                              @else
+                             <input type="radio" name="origine" value="masculin" id="masculin" required="required">
+                             @endif
+                             Masculin
                               </label>
                           </div>
                           <div class="radio">
                             <label for="feminin" class="radio">
-                            <input type="radio" name="origine" value="feminin" id="feminin">
+                                @if($dossierEmploye->Sexe=='feminin')
+                            <input type="radio" checked name="origine" value="feminin" id="feminin">
+                           @else
+                           <input type="radio" name="origine" value="feminin" id="feminin">
+                                @endif
                             Feminin
                             </label>
                         </div>
@@ -107,7 +115,7 @@
                 </div>
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-                    <input value={{$dossierEmploye->Email}} type="email" class="form-control"id="email" name="email" placeholder="Email"required="required">
+                    <input value='{{$dossierEmploye->Email}}' type="email" class="form-control"id="email" name="email" placeholder="Email"required="required">
                     <span id='emailErreur' class='text-danger' style="display:none;">
                 </div>
 
@@ -127,19 +135,31 @@
                  <fieldset id="status">
                       <div class="radio">
                           <label for="celibataire" class="radio">
+                            @if($dossierEmploye->StatutMatrimonial=='celibataire')
                           <input type="radio" checked name="origin" value="celibataire" id="celibataire"required="required">
-                          Celibataire
+                         @else
+                         <input type="radio"  name="origin" value="celibataire" id="celibataire"required="required">
+                         @endif
+                         Celibataire
                           </label>
                       </div>
                       <div class="radio">
                         <label for="fiance" class="radio">
-                        <input type="radio" name="origin" value="fiance" id="fiance">
+                        @if($dossierEmploye->StatutMatrimonial=='fiance')
+                            <input type="radio" checked name="origin" value="fiance" id="fiance">
+                            @else
+                            <input type="radio" name="origin" value="fiance" id="fiance">
+                            @endif
                         Fiance
                         </label>
                     </div>
                     <div class="radio">
                       <label for="marie" class="radio">
-                      <input type="radio" name="origin" value="marie" id="marie">
+                          @if($dossierEmploye->StatutMatrimonial=='marie')
+                      <input type="radio" checked name="origin" value="marie" id="marie">
+                      @else
+                      <input type="radio"  name="origin" value="marie" id="marie">
+                        @endif
                       Marie
                       </label>
                       </div>
@@ -161,7 +181,7 @@
                         <select id='listeP' class='form-control'>
 
                             </select>
-                            <span id='professionErreur' class='text-danger' style="display:none;">
+                            <span id='professionErreur' class='text-danger' style="display:none;"></span>
                 </div>
 
             </div>
@@ -175,7 +195,21 @@
               </div>
               <div class="box-footer">
                   <button id="sende" type="button" class="btn btn-primary">Modifier</button>
-               </div>
+                  @if($dossierEmploye->Compte)
+                    @if($dossierEmploye->Compte->status==1 || $dossierEmploye->Compte->status==2)
+                  <button id="resetUser" type="button" class="btn btn-primary">Reinitialiser mot de passe</button>
+                     @endif
+                     @if($dossierEmploye->Compte->status!=0)
+                  <button id="deleteUser" type="button" class="btn btn-primary">Suspendre utilisateur</button>
+                     @endif
+                     @if($dossierEmploye->Compte->status==0)
+                  <button id="reactivateUser" type="button" class="btn btn-primary">Reactiver utilisateur</button>
+                     @endif
+                 @else
+                 <button id="createUser" type="button" class="btn btn-primary">Creer utilisateur</button>
+                 @endif
+
+                </div>
 
             </div>
 
@@ -196,23 +230,23 @@
                   <label for="lieunais" class="col-sm-2 control-label">Lieu de naissance</label>
 
                   <div class="col-sm-10">
-                    <input value={{$dossierEmploye->LieuNaissance}} type="text" class="form-control" id="lieunais" name="lieunais" placeholder="Lieu..." required>
-                    <span id='lieuNaissanceErreur' class='text-danger' style="display:none;">
+                    <input value='{{$dossierEmploye->LieuNaissance}}' type="text" class="form-control" id="lieunais" name="lieunais" placeholder="Lieu..." required>
+                    <span id='lieuNaissanceErreur' class='text-danger' style="display:none;"></span>
                 </div>
                 </div>
                 <div class="form-group">
                     <label for="datenais" class="col-sm-2 control-label">Date de naissance</label>
                     <div class="col-sm-10">
                       <input value={{$dossierEmploye->DateNaissance}} type="date" class="form-control datepicker" name="datenais" id="datenais" placeholder="Date de naissance"required="required">
-                      <span id='dateNaissanceErreur' class='text-danger' style="display:none;">
+                      <span id='dateNaissanceErreur' class='text-danger' style="display:none;"></span>
                     </div>
                   </div>
                 <div class="form-group">
                   <label for="adresse" class="col-sm-2 control-label">Adresse</label>
 
                   <div class="col-sm-10">
-                    <input value={{$dossierEmploye->Adresse}} type="text" class="form-control" name="adresse" id="adresse" placeholder="Entrer l'adresse"required="required">
-                    <span id='adresseErreur' class='text-danger' style="display:none;">
+                    <input value='{{$dossierEmploye->Adresse}}' type="text" class="form-control" name="adresse" id="adresse" placeholder="Entrer l'adresse"required="required">
+                    <span id='adresseErreur' class='text-danger' style="display:none;"></span>
                 </div>
                 </div>
                 <div class="form-group">
@@ -233,8 +267,8 @@
                     <label>NIF</label>
                   <div class="row">
                     <div class="col-xs-12">
-                      <input value={{$dossierEmploye->Nif}} id="nif"type="number" class="form-control" name="nif" placeholder="xxx"required="required">
-                      <span id='nifErreur' class='text-danger' style="display:none;">
+                      <input value='{{$dossierEmploye->Nif}}' id="nif"type="number" class="form-control" name="nif" placeholder="xxx"required="required">
+                      <span id='nifErreur' class='text-danger' style="display:none;"></span>
                     </div>
 
                   </div>
@@ -244,8 +278,8 @@
                       <label>CIN</label>
                     <div class="row">
                       <div class="col-xs-12">
-                        <input value={{$dossierEmploye->Cin}} id="cin" type="number" class="form-control"name="cin" placeholder="xxx"required="required">
-                        <span id='cinErreur' class='text-danger' style="display:none;">
+                        <input value='{{$dossierEmploye->Cin}}' id="cin" type="number" class="form-control"name="cin" placeholder="xxx"required="required">
+                        <span id='cinErreur' class='text-danger' style="display:none;"></span>
                     </div>
 
                     </div>

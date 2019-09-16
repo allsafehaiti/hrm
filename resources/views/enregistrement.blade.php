@@ -1,5 +1,5 @@
 
-    <div id='tag'></div>
+
     <section class="content-header">
 
       <h1>
@@ -18,9 +18,7 @@
         <li><a href="#">Formulaires</a></li>
         <li class="active">Enregistrer employe</li>
       </ol>
-      <div id="load" class="overlay">
-            <i class="fa fa-refresh fa-spin"></i>
-          </div>
+
 
     </section>
 
@@ -75,7 +73,7 @@
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
                     <input type="email" class="form-control"id="email" name="email" placeholder="Email"required="required">
-                    <span id='emailErreur' class='text-danger' style="display:none;">
+                    <span id='emailErreur' class='text-danger' style="display:none;"></span>
                 </div>
 
 
@@ -85,7 +83,7 @@
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-phone"></i></span>
                         <input type="text" class="form-control"id="phone" name="tel" placeholder="Telephone">
-                        <span id='phoneErreur' class='text-danger' style="display:none;">
+                        <span id='phoneErreur' class='text-danger' style="display:none;"></span>
                     </div>
 
                <!-- radio -->
@@ -127,7 +125,7 @@
                         <select id='listeP' class='form-control'>
 
                             </select>
-                            <span id='professionErreur' class='text-danger' style="display:none;">
+                            <span id='professionErreur' class='text-danger' style="display:none;"></span>
                 </div>
 
             </div>
@@ -162,14 +160,14 @@
 
                   <div class="col-sm-10">
                     <input type="text" class="form-control" id="lieunais" name="lieunais" placeholder="Lieu..."required="required">
-                    <span id='lieuNaissanceErreur' class='text-danger' style="display:none;">
+                    <span id='lieuNaissanceErreur' class='text-danger' style="display:none;"></span>
                 </div>
                 </div>
                 <div class="form-group">
                     <label for="datenais" class="col-sm-2 control-label">Date de naissance</label>
                     <div class="col-sm-10">
                       <input type="date" class="form-control datepicker" name="datenais" id="datenais" placeholder="Date de naissance"required="required">
-                      <span id='dateNaissanceErreur' class='text-danger' style="display:none;">
+                      <span id='dateNaissanceErreur' class='text-danger' style="display:none;"></span>
                     </div>
                   </div>
                 <div class="form-group">
@@ -177,7 +175,7 @@
 
                   <div class="col-sm-10">
                     <input type="text" class="form-control" name="adresse" id="adresse" placeholder="Entrer l'adresse"required="required">
-                    <span id='adresseErreur' class='text-danger' style="display:none;">
+                    <span id='adresseErreur' class='text-danger' style="display:none;"></span>
                 </div>
                 </div>
                 <div class="form-group">
@@ -199,7 +197,7 @@
                   <div class="row">
                     <div class="col-xs-12">
                       <input id="nif"type="number" class="form-control" name="nif" placeholder="xxx"required="required">
-                      <span id='nifErreur' class='text-danger' style="display:none;">
+                      <span id='nifErreur' class='text-danger' style="display:none;"></span>
                     </div>
 
                   </div>
@@ -210,7 +208,7 @@
                     <div class="row">
                       <div class="col-xs-12">
                         <input id="cin" type="number" class="form-control"name="cin" placeholder="xxx"required="required">
-                        <span id='cinErreur' class='text-danger' style="display:none;">
+                        <span id='cinErreur' class='text-danger' style="display:none;"></span>
                     </div>
 
                     </div>

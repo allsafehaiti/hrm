@@ -1,4 +1,11 @@
 @inject('getProfession','App\getProfession')
+
+  </div>
+
+
+
+
+
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <div class='container' style="width:95%;">
         <table id='list' class=' display' style='display:none;'>
@@ -42,6 +49,7 @@
 <script>
     $(document).ready(function()
     {
+        $('#loader').hide();
         $('#list').DataTable
         (
             {
@@ -75,7 +83,6 @@
     $('tr').click(function(){
 
 let id=$(this).find('input').val();
-
 $('#page').load('dossierEmploye/'+id);
 
 });

@@ -15,15 +15,14 @@
   <link rel="stylesheet" href="cs/ionicons.min.css">
   <link rel="stylesheet" href="css/AdminLTE.css">
   <link rel="stylesheet" href="css/_all-skins.min.css">
+  <link rel="stylesheet" href="css/loader.css">
 
 
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 <body class="skin-blue ">
-        <div id='tagg'>
 
-        </div>
 <div class="wrapper">
 
   <header class="main-header">
@@ -38,17 +37,30 @@
     <nav class="navbar navbar-static-top">
 
 
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </a>
+        @if(Auth::check())
+        <div class='navbar navbar-right' >
+            <a data-toggle='dropdown' class='btn btn-warning dropdown-toggle' style="position:relative;right:80%;bottom:0px;top:8px;">{{Auth::user()->nomUtilisateur}}</a>
+            <ul class='dropdown-menu'>
+            <li><a id ='voirP'class="dropdown-item">Voir profile</a></li>
+            <li><a class="dropdown-item">Messages</a></li>
+            <li><a class="dropdown-item" id='changerMdp'>Changer mot de passe</a></li>
+            <li ><a href='logout' class="dropdown-item">Deconnecter </a></li>
+
+
+            </ul>
+        </div>
+        @endif
+        @if(!Auth::check())
+        <div class='navbar navbar-right'>
+            <button id='seConnecter' class='btn btn-warning' style="position:relative;right:80%;bottom:0px;top:8px;">Se connecter</button>
+        </div>
+        @endif
 
 
     </nav>
   </header>
-  <aside class="main-sidebar">
-    <section class="sidebar">
+  <aside  class="main-sidebar">
+    <section id='menuLeft' class="sidebar">
 
       <form action="#" method="get" class="sidebar-form">
         <div class="input-group">
@@ -64,32 +76,35 @@
         <li class="header">MAIN NAVIGATION</li>
 
        <style>
-           li:hover { background-color:#006db9; }
-           li:active {background-color: #FF851B; }
+           .lil:hover { background-color:#006db9; }
+           .lil:active {background-color: #FF851B; }
+           .li{}
        </style>
-
+    @if(Auth::check())
         <li class="treeview active">
-          <a href="#">
-            <i class="fa fa-edit"></i> <span>Formulaires</span>
-            <span class="pull-right-container">
+          <a  data-toggle="collapse" href='#doss'>
+            <i class="fa fa-edit"></i> <span> Dossier employe</span>
+            <span class="pull-right-container" >
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
-          <ul class="treeview-menu">
-            <li class="active"><a href="#" id="loadFormulaire"><i class="fa fa-circle-o"></i> Enregistrer emeploye</a></li>
-            <li class="active" id='hhv' style='hover { background-color: yellow;  } '><a href="#" id="listeDossierEmploye"><i class="fa fa-circle-o"></i> Liste Dossier Employe</a></li>
+          <ul class=" collapse" id='doss'>
+            <li ><a href="#" class="lil font-weight-light" id="loadFormulaire">Enregistrer employe</a></li>
+            <li ><a href="#" id="listeDossierEmploye" class="lil font-weight-light"> Liste Dossier Employe</a></li>
 
           </ul>
         </li>
 
-
+        @endif
 
 
       </ul>
     </section>
-
+<input type="hidden" value="{{Auth::user()->idDossier}}" id='idDossier'>
   </aside>
+  <div  id='loader' class="loader" hidden>
 
+  </div>
   <!-- Contenu page -->
   <div id="page" class="content-wrapper">
 
@@ -111,21 +126,53 @@
 
 <script src="js/bootstrap.min.js"></script>
 
-<script src='js/enregistrement.js'></script>
+
 
 <script>
+
   $(document).ready(function()
   {
+
+      $('menuLeft').height($(document).height());
     $("#loadFormulaire").click(function()
     {
+        $('#page').empty();
+        $('#loader').show();
          $("#page").load('enregistrement');
 
     });
 
     $("#listeDossierEmploye").click(function()
     {
+        $('#page').empty();
+        $('#loader').show();
       $("#page").load('listeDossierEmploye');
     });
+
+    $("#seConnecter").click(function()
+    {
+        $('#page').empty();
+        $('#loader').show();
+      $("#page").load('loginForm');
+    });
+
+    $("#changerMdp").click(function()
+    {
+
+        $('#page').empty();
+        $('#loader').show();
+      $("#page").load('modifierMdp');
+    });
+
+    $("#voirP").click(function()
+    {
+        $('#page').empty();
+        $('#loader').show();
+      $("#page").load('dossierEmploye/'+$('#idDossier').val());
+    });
+
+
+
   });
 </script>
 
