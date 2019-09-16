@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
+
 use App\Model\DossierEmploye\DossierEmploye;
 use App\Model\DossierEmploye\Skill;
 use App\Model\DossierEmploye\EmployeSkill;
@@ -21,7 +23,7 @@ class DossierEmployeController extends Controller
      */
     public function index()
     {
-        return DossierEmploye::all();
+        return DossierEmployeDB::select('Nom','Prenom','Nif','Profession','created_at','updated_at','Email');
     }
 
     /**
@@ -208,6 +210,6 @@ class DossierEmployeController extends Controller
     }
     public function listeDossier()
     {
-        return response()->view('listeDossierEmploye',['listeDossierEmploye'=>DossierEmploye::all()]);
+        return response()->view('listeDossierEmploye',['listeDossierEmploye'=>DB::table('dossieremploye')->select('id','Nom','Prenom','Nif','Sexe','Profession','created_at','updated_at','Email')->get()]);
     }
 }

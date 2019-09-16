@@ -83,6 +83,8 @@
     $('tr').click(function(){
 
 let id=$(this).find('input').val();
+$('#page').empty();
+        $('#loader').show();
 $('#page').load('dossierEmploye/'+id);
 
 });

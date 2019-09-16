@@ -147,6 +147,7 @@
         $('#page').empty();
         $('#loader').show();
       $("#page").load('listeDossierEmploye');
+
     });
 
     $("#seConnecter").click(function()
