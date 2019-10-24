@@ -1,5 +1,6 @@
 <?php
 
+use App\Model\DossierEmploye\DossierEmploye;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -37,3 +38,12 @@ Route::get('modifierMdp',function()
     return view('modifierMdp');
 });
 Route::post('changerMdp','Controller\utilisateurController@changerMdp');
+///////////////////////bar-CODE/////////////////
+
+Route::get('createBadge/{id}','Controller\DossierEmployeController@createBadge');
+Route::get('downloadPDF/{id}','Controller\DossierEmployeController@downloadPDF');
+
+Route::get('ll','Controller\DossierEmployeController@ll');
+//////Presence////////////////
+Route::get('listPresence', 'Controller\GestionPresenceController@list')->name('listPresence');
+Route::get('urlMJ/{id}','Controller\GestionPresenceController@verifierUrlMJ');

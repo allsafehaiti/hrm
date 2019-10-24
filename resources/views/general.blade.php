@@ -91,6 +91,7 @@
           <ul class=" collapse" id='doss'>
             <li ><a href="#" class="lil font-weight-light" id="loadFormulaire">Enregistrer employe</a></li>
             <li ><a href="#" id="listeDossierEmploye" class="lil font-weight-light"> Liste Dossier Employe</a></li>
+            <li ><a href="#" id="listPresence" class="lil font-weight-light"> Liste Presence</a></li>
 
           </ul>
         </li>
@@ -149,6 +150,14 @@
       $("#page").load('listeDossierEmploye');
     });
 
+    $("#listPresence").click(function()
+    {
+        $('#page').empty();
+        $('#loader').show();
+      $("#page").load('listPresence');
+    });
+
+
     $("#seConnecter").click(function()
     {
         $('#page').empty();
@@ -170,6 +179,8 @@
         $('#loader').show();
       $("#page").load('dossierEmploye/'+$('#idDossier').val());
     });
+
+  
 
 
 
