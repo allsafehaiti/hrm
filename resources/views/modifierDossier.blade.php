@@ -40,7 +40,7 @@
             <!-- /.box-header -->
             <!-- form start -->
 
-        <input type='hidden' value='{{ $dossierEmploye->id}}' id='dossierId'>
+        <input type='hidden'  id='dossierId' value='{{$dossierEmploye->id}}' >
          <input type="hidden" value='{{$dossierEmploye->ProfessionEmploye->Description}}' id='professionBlade'>
          <div id='listeSkills'>
                 @foreach($dossierEmploye->Skills as $skill)
@@ -208,6 +208,8 @@
                  @else
                  <button id="createUser" type="button" class="btn btn-primary">Creer utilisateur</button>
                  @endif
+                 
+                 <button id="createBadge" type="button" class="btn btn-warning">Creer Badge</button>
 
                 </div>
 

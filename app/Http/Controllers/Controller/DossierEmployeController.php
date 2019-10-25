@@ -14,8 +14,15 @@ use App\Model\DossierEmploye\Experience;
 use App\Model\DossierEmploye\Profession;
 use App\Http\Requests\FormulaireDossierEmploye;
 
+use Illuminate\Support\Facades\Crypt;
+use Redirect;
+use PDF;
+use Storage;
+use DNS2D;
+
 class DossierEmployeController extends Controller
 {
+    
     /**
      * Display a listing of the resource.
      *
@@ -212,4 +219,45 @@ class DossierEmployeController extends Controller
     {
         return response()->view('listeDossierEmploye',['listeDossierEmploye'=>DB::table('dossieremploye')->select('id','Nom','Prenom','Nif','Sexe','Profession','created_at','updated_at','Email')->get()]);
     }
+
+    ///badge///
+   
+
+       /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function createBadge($id)
+    {       
+       // dd($id);
+      // $encrypted = Crypt::encryptString($id);
+      // $decrypted = Crypt::decryptString($encrypted);
+       //dd($encrypted);
+      // dd($decrypted);
+        $dossier=DossierEmploye::find($id);
+       // $image =\QrCode::format('png')
+               // ->size(120)
+               // ->generate($encrypted);
+       // $output_file ='/img/qr-code/img-'.$id.'.png';
+       // Storage::disk('public')->put($output_file, $image);//storage/app/public/img/qr-code/img-54343.png
+       Storage::disk('public')->put('barcode-'.$id.'.png',base64_decode(DNS2D::getBarcodePNG(substr("000000000{$id}",-9), "PDF417")));
+        return response()->view('badge',['dossierEmploye'=>$dossier]);
+    }
+
+    public function downloadPDF($id){
+        $dossierEmploye = DossierEmploye::find($id);
+            $pdf = PDF::loadView('pdf', compact('dossierEmploye'));
+        return $pdf->download('badge.pdf'); 
+   // dd('ok');
+    }
+
+    public function ll()
+    {       
+        $dossier=DossierEmploye::find(15);
+        return response()->view('pdf',['dossierEmploye'=>$dossier]);
+    }
+
 }
+

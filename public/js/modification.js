@@ -386,3 +386,16 @@ $('#reactivateUser').click(function(){
 
     });
 });
+
+/////////////// create badge ///////////
+
+
+$("#createBadge").click(function()
+{
+    var temp=$('#dossierId').val()
+    $('#page').empty();//loooll la mpedu tout valeurs yo
+    $('#loader').show();
+    console.log('id a se :' +temp);
+    console.log('createBadge/'+temp);
+  $("#page").load('createBadge/'+temp);
+});
