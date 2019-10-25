@@ -19,5 +19,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
-Route::get('/connecter/{username}/{password}/','Controller/ApiController@connecter');
-Route::get('/verifierPresence/{codeBar}','Controller/ApiController@verifierPresence');
+Route::get('/connecter/{username}/{password}/','Controller\ApiController@connecter');
+Route::get('/verifierPresence/{codeBar}','Controller\ApiController@verifierPresence');
