@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 /*
@@ -16,3 +17,7 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
+Route::get('/connecter/{username}/{password}/','Controller/ApiController@connecter');
+Route::get('/verifierPresence/{codeBar}','Controller/ApiController@verifierPresence');
