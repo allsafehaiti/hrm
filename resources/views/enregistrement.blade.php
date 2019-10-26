@@ -24,7 +24,6 @@
 
 
     <section class="content">
-        <form action="trait_enr_emp.php" method="POST">
       <div class="row">
 
         <div class="col-md-6">

@@ -22,23 +22,20 @@ use DNS2D;
 
 class DossierEmployeController extends Controller
 {
-    
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        return DossierEmployeDB::select('Nom','Prenom','Nif','Profession','created_at','updated_at','Email');
-    }
+
 
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function createDossier(Request $request)
     {
 
         $listeProfession=Profession::all();
@@ -47,13 +44,7 @@ class DossierEmployeController extends Controller
         'listeCompetance'=>$listeCompetance]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     *
-     */
+
     public function store(FormulaireDossierEmploye $request)
     {
         $dossier=new DossierEmploye ;
@@ -101,23 +92,13 @@ class DossierEmployeController extends Controller
 
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function show($id)
     {
         return DossierEmploye::find($id);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit($dossier)
     {
         $dossier=DossierEmploye::find($dossier);
@@ -182,25 +163,9 @@ class DossierEmployeController extends Controller
     return response('Modification effectue avec Succes',200);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        $dossier=DossierEmploye::find($id);
-        $dossier::update($request->all());
-    }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
+
     public function destroy($id)
     {
        $dossier=DossierEmploye::find($id);
@@ -221,7 +186,7 @@ class DossierEmployeController extends Controller
     }
 
     ///badge///
-   
+
 
        /**
      * Show the form for editing the specified resource.
@@ -230,18 +195,10 @@ class DossierEmployeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function createBadge($id)
-    {       
-       // dd($id);
-      // $encrypted = Crypt::encryptString($id);
-      // $decrypted = Crypt::decryptString($encrypted);
-       //dd($encrypted);
-      // dd($decrypted);
+    {
+
         $dossier=DossierEmploye::find($id);
-       // $image =\QrCode::format('png')
-               // ->size(120)
-               // ->generate($encrypted);
-       // $output_file ='/img/qr-code/img-'.$id.'.png';
-       // Storage::disk('public')->put($output_file, $image);//storage/app/public/img/qr-code/img-54343.png
+
        Storage::disk('public')->put('barcode-'.$id.'.png',base64_decode(DNS2D::getBarcodePNG(substr("000000000{$id}",-9), "PDF417")));
         return response()->view('badge',['dossierEmploye'=>$dossier]);
     }
@@ -249,12 +206,11 @@ class DossierEmployeController extends Controller
     public function downloadPDF($id){
         $dossierEmploye = DossierEmploye::find($id);
             $pdf = PDF::loadView('pdf', compact('dossierEmploye'));
-        return $pdf->download('badge.pdf'); 
-   // dd('ok');
+        return $pdf->download('badge.pdf');
     }
 
     public function ll()
-    {       
+    {
         $dossier=DossierEmploye::find(15);
         return response()->view('pdf',['dossierEmploye'=>$dossier]);
     }
