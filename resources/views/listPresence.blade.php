@@ -9,23 +9,27 @@
         <table id='list' class=' display' style='display:none;'>
                 <thead>
                     <tr>
-                        <th>id Employe</th>
+                        <th>Employe</th>
                         <th>Date</th>
-                        <th>Is Present</th>
+                        <th>Present</th>
                     </tr>
                 </thead>
 
                 <tbody>
                     @foreach ($list as $emp)
-                      <tr id='rowC' style='cursor:pointer;'>
-                    <td> {{ $emp->employeId}}</td>
-                    <td> {{ $emp->created_at}}</td>
-                    @if( $emp->isPresent==1)
-                    <td><a class="fa fa-check" style="color:green; margin-left:30px;"></a></td>
-                    @else
-                    <td><a class="fa fa-close" style="color:red; padding-left:30px;"></a></td>
-                    @endif
-                  </tr>
+                        <tr id='rowC' style='cursor:pointer;'>
+                            @foreach($employes as $unNom)
+                                @if($emp->employeId==$unNom->id)
+                                     <td> {{ $unNom->Nom}}  {{$unNom->Prenom}}</td>
+                                @endif
+                            @endforeach
+                            <td> {{ $emp->created_at}}</td>
+                            @if( $emp->isPresent==1)
+                            <td><a class="fa fa-check" style="color:green; margin-left:30px;"></a></td>
+                            @else
+                            <td><a class="fa fa-close" style="color:red; padding-left:30px;"></a></td>
+                            @endif
+                        </tr>
                     @endforeach
 
                 </tbody>
