@@ -16,7 +16,7 @@ class GestionPresenceController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function list(){
-        return response()->view('listPresence',['list'=>Presence::all()]);
+        return response()->view('listPresence',['list'=>Presence::all(),'employes'=>DossierEmploye::all()]);
     }
     public function verifierUrlMJ($id){
         $emp = DossierEmploye::findOrFail($id);
@@ -28,7 +28,7 @@ class GestionPresenceController extends Controller
         $present->isPresent=1;
         $present->created_at=now();
         $present->save();
-        return response()->view('listPresence',['list'=>Presence::all()]);
+        return response()->view('listPresence',['list'=>Presence::all(),'employes'=>DossierEmploye::all()]);
         }
     }
 }

@@ -30,12 +30,12 @@
 
     <form>
       <div class="form-group has-feedback">
-        <input id="email" type="email" class="form-control glyphicon glyphicon " placeholder="Email" required="required" style="border-radius:50px;">
-        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+        <input id="email" type="email" class="form-control" placeholder="Email" required="required" style="border-radius:50px;">
+        <span class="fa fa-envelope form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
         <input id="pass"type="password" class="form-control" placeholder="Mot de passe" required="required" style="border-radius:50px;">
-        <span class="glyphicon glyphicon-lock "></span>
+        <span class="fa fa-lock form-control-feedback"></span>
       </div>
       <div id="msg" ><a class="text-danger"></a></div>
       <div class="row">
@@ -87,7 +87,44 @@ headers: {
     });
 });
 
+//clear error msg
+$('#pass').keydown(function(){
+  $('#msg').empty();
+});
+$('#email').keydown(function(){
+  $('#msg').empty();
+});
 
+
+</script>
+
+<script>
+    document.onkeydown=function(evt){
+        var keyCode = evt ? (evt.which ? evt.which : evt.keyCode) : event.keyCode;
+        if(keyCode == 13)
+        {    $.ajaxSetup({
+
+headers: {
+
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+
+        }
+});
+    $.ajax({
+        url:'login',
+        type:'POST',
+        data:{'nomUtilisateur':$('#email').val(),'motDePasse':$('#pass').val()},
+        success:function(){
+            window.location.replace('accueil');
+        },
+        error:function(res){
+            console.log(res);
+            $('#msg').empty();
+            $('#msg').append('<a class="text-danger">'+res.responseText+'</a>');
+        }
+    });
+        }
+    }
 </script>
 
 </body>
